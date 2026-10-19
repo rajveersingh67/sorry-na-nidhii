@@ -1,0 +1,155 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-heading: 'Caveat', cursive;
+    --font-handwriting: 'Pacifico', cursive;
+    --font-body: 'Nunito', sans-serif;
+  }
+}
+
+.font-heading {
+  font-family: 'Caveat', cursive;
+}
+
+.font-romantic {
+  font-family: 'Pacifico', cursive;
+}
+
+.font-body {
+  font-family: 'Nunito', sans-serif;
+}
+
+/* Custom Soft Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(2deg);
+  }
+}
+
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-20px) scale(1.03);
+  }
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.15);
+  }
+  28% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.22);
+  }
+  70% {
+    transform: scale(1);
+  }
+}
+
+@keyframes wiggle {
+  0%, 100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(255, 105, 180, 0.4), 0 0 30px rgba(255, 182, 193, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 28px rgba(255, 77, 109, 0.6), 0 0 50px rgba(255, 105, 180, 0.4);
+  }
+}
+
+@keyframes situp-body {
+  0%, 100% {
+    transform: rotate(0deg) translateY(0);
+  }
+  50% {
+    transform: rotate(-55deg) translateY(15px);
+  }
+}
+
+@keyframes cloud-drift {
+  0% {
+    transform: translateX(-10%);
+  }
+  100% {
+    transform: translateX(110%);
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+.animate-heartbeat {
+  animation: heartbeat 1.6s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+.animate-wiggle {
+  animation: wiggle 1s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2.5s infinite;
+}
+
+.animate-situp {
+  animation: situp-body 0.8s ease-in-out;
+}
+
+/* Glass card styles */
+.glass-card {
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 215, 225, 0.8);
+  box-shadow: 0 12px 36px -10px rgba(255, 143, 163, 0.22), 0 4px 12px rgba(255, 182, 193, 0.15);
+}
+
+.glass-card-hover {
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.glass-card-hover:hover {
+  transform: translateY(-6px) scale(1.015);
+  box-shadow: 0 20px 45px -10px rgba(255, 105, 180, 0.3), 0 8px 20px rgba(255, 143, 163, 0.2);
+}
+
+/* Custom romantic scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FFF0F5;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #FFAAC9;
+  border-radius: 9999px;
+  border: 2px solid #FFF0F5;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #FF758F;
+}
