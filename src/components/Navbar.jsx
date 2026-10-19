@@ -1,136 +1,125 @@
-import React, { useState } from 'react';
-import { Music, Volume2, VolumeX, Sparkles, Heart, Bell, BellOff } from 'lucide-react';
-import { soundManager } from '../utils/sound';
+import React, { useState, useEffect } from 'react';
+import { Heart, Menu, X, Sparkles } from 'lucide-react';
 
-export default function Navbar({ isMusicPlaying, setIsMusicPlaying, sfxEnabled, setSfxEnabled }) {
-  const [navOpen, setNavOpen] = useState(false);
+export default function Navbar({ onOpenHeart }) {
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const toggleMusic = () => {
-    soundManager.playPop();
-    const playing = soundManager.toggleBGM((state) => {
-      setIsMusicPlaying(state);
-    });
-    setIsMusicPlaying(playing);
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const currentProgress = (window.scrollY / (totalScroll || 1)) * 100;
+      setScrollProgress(currentProgress);
+      setIsScrolled(window.scrollY > 40);
+    };
 
-  const toggleSfx = () => {
-    const newState = !sfxEnabled;
-    soundManager.sfxEnabled = newState;
-    setSfxEnabled(newState);
-    if (newState) soundManager.playPop();
-  };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navLinks = [
-    { label: '💌 Apology', href: '#apology' },
-    { label: '🧸 Hugs', href: '#hug' },
-    { label: '🏋️ Sit-Ups', href: '#situps' },
-    { label: '🐻 Stickers', href: '#stickers' },
-    { label: '💗 Why Special', href: '#special' },
-    { label: '🎁 Surprise', href: '#surprise' },
-    { label: '💞 Love Meter', href: '#love-meter' },
-    { label: '🥹 Final Note', href: '#final' },
+    { label: 'My Heart', href: '#hero' },
+    { label: 'Forgive Me', href: '#photos' },
+    { label: 'The Letter', href: '#letter' },
+    { label: 'Treasured Moments', href: '#memories' },
+    { label: '5 Reasons', href: '#reasons' },
+    { label: 'My Promises', href: '#promises' },
+    { label: 'Can We Talk?', href: '#game' },
+    { label: 'A Special Hug', href: '#surprise' },
   ];
 
   return (
-    <header className="sticky top-0 z-50 px-3 sm:px-6 py-2.5 backdrop-blur-md bg-white/70 border-b border-pink-200/60 shadow-sm transition-all">
-      <div className="max-w-6xl mx-auto flex items-center justify-between gap-2">
-        {/* Brand */}
-        <a
-          href="#hero"
-          onClick={() => soundManager.playPop()}
-          className="flex items-center gap-2 group cursor-pointer"
-        >
-          <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-pink-400 to-rose-400 flex items-center justify-center text-white shadow-md group-hover:scale-110 transition-transform">
-            <Heart className="w-5 h-5 fill-white" />
-          </div>
-          <div className="text-left">
-            <span className="font-heading text-xl sm:text-2xl font-bold text-pink-600 block leading-none">
-              Nidhi & Me 🥺
-            </span>
-            <span className="text-[10px] text-pink-400 font-bold uppercase tracking-wider block">
-              I am so sorry meri jaan
-            </span>
-          </div>
-        </a>
-
-        {/* Desktop Nav Links */}
-        <nav className="hidden lg:flex items-center gap-1.5">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={() => soundManager.playPop()}
-              className="px-3 py-1.5 rounded-full text-xs font-bold text-pink-700/80 hover:text-pink-600 hover:bg-pink-100/70 transition-colors"
-            >
-              {link.label}
-            </a>
-          ))}
-        </nav>
-
-        {/* Controls: Music & SFX */}
-        <div className="flex items-center gap-2">
-          {/* Music Toggle */}
-          <button
-            onClick={toggleMusic}
-            title={isMusicPlaying ? 'Mute Romantic Music' : 'Play Romantic Music'}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold transition-all shadow-sm ${
-              isMusicPlaying
-                ? 'bg-gradient-to-r from-pink-500 to-rose-500 text-white animate-pulse'
-                : 'bg-pink-100/90 text-pink-700 hover:bg-pink-200/90'
-            }`}
-          >
-            {isMusicPlaying ? (
-              <>
-                <Volume2 className="w-4 h-4 animate-bounce" />
-                <span className="hidden sm:inline">Music: Playing 🎶</span>
-                <span className="sm:hidden">🎵</span>
-              </>
-            ) : (
-              <>
-                <VolumeX className="w-4 h-4 text-pink-400" />
-                <span className="hidden sm:inline">Romantic Music: Off</span>
-                <span className="sm:hidden">🔇</span>
-              </>
-            )}
-          </button>
-
-          {/* SFX Toggle */}
-          <button
-            onClick={toggleSfx}
-            title={sfxEnabled ? 'Turn Off Sound Effects' : 'Turn On Sound Effects'}
-            className="p-1.5 rounded-full bg-pink-100/90 text-pink-700 hover:bg-pink-200 transition-colors text-xs font-bold"
-          >
-            {sfxEnabled ? <Bell className="w-4 h-4 text-pink-600" /> : <BellOff className="w-4 h-4 text-pink-300" />}
-          </button>
-
-          {/* Mobile menu trigger */}
-          <button
-            onClick={() => setNavOpen(!navOpen)}
-            className="lg:hidden p-1.5 rounded-full bg-pink-100 text-pink-700 font-bold text-xs"
-          >
-            {navOpen ? '✕' : '☰'}
-          </button>
-        </div>
+    <>
+      {/* Scroll Progress Bar at Top */}
+      <div className="fixed top-0 left-0 right-0 h-[3px] bg-rose-100 z-50">
+        <div
+          className="h-full bg-gradient-to-r from-rose-400 via-pink-500 to-rose-600 transition-all duration-150"
+          style={{ width: `${scrollProgress}%` }}
+        />
       </div>
 
-      {/* Mobile Nav Drawer */}
-      {navOpen && (
-        <div className="lg:hidden mt-2 pt-2 border-t border-pink-200/60 flex flex-wrap gap-1.5 justify-center py-2">
-          {navLinks.map((link) => (
+      <header
+        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+          isScrolled
+            ? 'glass-card py-3.5 shadow-sm border-b border-rose-200/40'
+            : 'bg-transparent py-5'
+        }`}
+      >
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between">
+          {/* Logo / Sweet Brand */}
+          <a
+            href="#hero"
+            className="flex items-center gap-2 group text-rose-800 hover:text-rose-600 transition-colors"
+          >
+            <div className="relative">
+              <Heart className="w-6 h-6 text-rose-500 fill-rose-500 transition-transform group-hover:scale-110 duration-200" />
+              <Sparkles className="w-3.5 h-3.5 text-amber-400 absolute -top-1 -right-1 animate-spin-slow" />
+            </div>
+            <span className="font-serif italic text-lg sm:text-xl font-bold tracking-wide text-rose-950">
+              For Nidhi, Meri Jaan ❤️
+            </span>
+          </a>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-1.5 lg:gap-3 text-sm font-medium">
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="px-3 py-1.5 rounded-full text-rose-900/80 hover:text-rose-600 hover:bg-rose-100/50 transition-all duration-200"
+              >
+                {link.label}
+              </a>
+            ))}
             <a
-              key={link.href}
-              href={link.href}
-              onClick={() => {
-                soundManager.playPop();
-                setNavOpen(false);
-              }}
-              className="px-3 py-1 rounded-full text-xs font-semibold bg-pink-50 text-pink-700 hover:bg-pink-100"
+              href="#letter"
+              className="ml-2 px-4 py-1.5 rounded-full text-xs font-semibold text-white bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 shadow-sm transition-all transform hover:scale-105"
             >
-              {link.label}
+              Read Letter 💌
             </a>
-          ))}
+          </nav>
+
+          {/* Mobile Hamburger Button */}
+          <div className="flex md:hidden items-center">
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2 rounded-xl text-rose-800 hover:bg-rose-100/60 transition-colors"
+              aria-label="Toggle navigation menu"
+            >
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
-      )}
-    </header>
+
+        {/* Mobile Dropdown Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden glass-card mx-4 mt-2 p-4 rounded-2xl border border-rose-200/80 shadow-romantic animate-in fade-in slide-in-from-top-3 duration-200">
+            <nav className="flex flex-col gap-2">
+              {navLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="px-4 py-2.5 rounded-xl text-rose-900/90 font-medium hover:bg-rose-100/70 hover:text-rose-600 transition-colors flex items-center justify-between"
+                >
+                  <span>{link.label}</span>
+                  <Heart className="w-3.5 h-3.5 text-rose-300" />
+                </a>
+              ))}
+              <div className="pt-2 border-t border-rose-100">
+                <a
+                  href="#letter"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-full block text-center py-2.5 rounded-xl bg-gradient-to-r from-rose-500 to-pink-500 text-white font-medium text-sm shadow-sm"
+                >
+                  Open Handwritten Letter 💌
+                </a>
+              </div>
+            </nav>
+          </div>
+        )}
+      </header>
+    </>
   );
 }

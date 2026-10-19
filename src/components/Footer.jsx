@@ -1,44 +1,28 @@
 import React from 'react';
-import { Heart, ArrowUp, Sparkles } from 'lucide-react';
-import { soundManager } from '../utils/sound';
+import { Heart, Sparkles } from 'lucide-react';
 
 export default function Footer() {
-  const scrollToTop = () => {
-    soundManager.playPop();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   return (
-    <footer className="py-12 px-4 relative z-10 text-center border-t border-pink-200/60 bg-white/40 backdrop-blur-md">
-      <div className="max-w-4xl mx-auto space-y-4">
-        {/* Soft Heartbeat Icon */}
-        <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-rose-100 text-rose-500 animate-heartbeat shadow-sm">
-          <Heart className="w-6 h-6 fill-rose-500" />
+    <footer className="bg-[#180816] text-rose-200/80 py-12 px-4 border-t border-rose-900/40 relative z-10 text-center">
+      <div className="max-w-4xl mx-auto flex flex-col items-center justify-center space-y-4">
+        {/* Heart Icon */}
+        <div className="flex items-center gap-2 text-rose-400">
+          <Sparkles className="w-4 h-4 text-amber-300" />
+          <Heart className="w-5 h-5 fill-rose-500 text-rose-500 animate-pulse" />
+          <Sparkles className="w-4 h-4 text-amber-300" />
         </div>
 
-        {/* Closing Note */}
-        <p className="font-heading text-2xl sm:text-3xl text-pink-700 font-bold">
-          "Hamesha tumhara, chahe tum gussa raho ya muskurao."
+        <p className="font-serif italic text-lg sm:text-xl text-rose-100 font-medium">
+          "Made with all my heart for Nidhi, meri jaan ❤️"
         </p>
 
-        <p className="text-xs sm:text-sm text-pink-600/80 font-semibold max-w-md mx-auto">
-          Crafted with 100% pure love, genuine remorse, and endless patience exclusively for my girl,{' '}
-          <span className="text-rose-600 font-bold">Nidhi 💗</span>
+        <p className="text-xs sm:text-sm text-rose-300/60 max-w-md font-light leading-relaxed">
+          Every word, every animation, and every small detail was created to show Nidhi how much she truly means to me. Take your time, Nidhi. I will always be right here.
         </p>
 
-        <div className="text-xs text-pink-400 font-mono pt-2">
-          Made for Nidhi • Tumhara Pagal Sa Person ❤️
-        </div>
-
-        {/* Scroll To Top Button */}
-        <div className="pt-4">
-          <button
-            onClick={scrollToTop}
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white/80 hover:bg-pink-100 text-pink-700 text-xs font-bold border border-pink-200 shadow-sm transition-all hover:scale-105 active:scale-95"
-          >
-            <ArrowUp className="w-3.5 h-3.5" />
-            <span>Back to Top 🧸</span>
-          </button>
+        <div className="pt-4 border-t border-rose-900/40 w-full max-w-xs text-[11px] text-rose-400/50 flex items-center justify-between">
+          <span>Forever Your Silly Boy</span>
+          <span>Dil Se 🥺💗</span>
         </div>
       </div>
     </footer>

@@ -1,143 +1,23 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @layer base {
-  :root {
-    --font-heading: 'Caveat', cursive;
-    --font-handwriting: 'Pacifico', cursive;
-    --font-body: 'Nunito', sans-serif;
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Outfit', sans-serif;
   }
-}
 
-.font-heading {
-  font-family: 'Caveat', cursive;
-}
-
-.font-romantic {
-  font-family: 'Pacifico', cursive;
-}
-
-.font-body {
-  font-family: 'Nunito', sans-serif;
-}
-
-/* Custom Soft Animations */
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
+  body {
+    background: radial-gradient(circle at top, #FFF0F5 0%, #FFF8FA 40%, #FDF4F8 100%);
+    color: #372A35;
+    min-height: 100vh;
   }
-  50% {
-    transform: translateY(-12px) rotate(2deg);
-  }
-}
-
-@keyframes float-slow {
-  0%, 100% {
-    transform: translateY(0px) scale(1);
-  }
-  50% {
-    transform: translateY(-20px) scale(1.03);
-  }
-}
-
-@keyframes heartbeat {
-  0%, 100% {
-    transform: scale(1);
-  }
-  14% {
-    transform: scale(1.15);
-  }
-  28% {
-    transform: scale(1);
-  }
-  42% {
-    transform: scale(1.22);
-  }
-  70% {
-    transform: scale(1);
-  }
-}
-
-@keyframes wiggle {
-  0%, 100% {
-    transform: rotate(-3deg);
-  }
-  50% {
-    transform: rotate(3deg);
-  }
-}
-
-@keyframes pulse-glow {
-  0%, 100% {
-    box-shadow: 0 0 15px rgba(255, 105, 180, 0.4), 0 0 30px rgba(255, 182, 193, 0.2);
-  }
-  50% {
-    box-shadow: 0 0 28px rgba(255, 77, 109, 0.6), 0 0 50px rgba(255, 105, 180, 0.4);
-  }
-}
-
-@keyframes situp-body {
-  0%, 100% {
-    transform: rotate(0deg) translateY(0);
-  }
-  50% {
-    transform: rotate(-55deg) translateY(15px);
-  }
-}
-
-@keyframes cloud-drift {
-  0% {
-    transform: translateX(-10%);
-  }
-  100% {
-    transform: translateX(110%);
-  }
-}
-
-.animate-float {
-  animation: float 4s ease-in-out infinite;
-}
-
-.animate-float-slow {
-  animation: float-slow 6s ease-in-out infinite;
-}
-
-.animate-heartbeat {
-  animation: heartbeat 1.6s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
-}
-
-.animate-wiggle {
-  animation: wiggle 1s ease-in-out infinite;
-}
-
-.animate-pulse-glow {
-  animation: pulse-glow 2.5s infinite;
-}
-
-.animate-situp {
-  animation: situp-body 0.8s ease-in-out;
-}
-
-/* Glass card styles */
-.glass-card {
-  background: rgba(255, 255, 255, 0.78);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 215, 225, 0.8);
-  box-shadow: 0 12px 36px -10px rgba(255, 143, 163, 0.22), 0 4px 12px rgba(255, 182, 193, 0.15);
-}
-
-.glass-card-hover {
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.glass-card-hover:hover {
-  transform: translateY(-6px) scale(1.015);
-  box-shadow: 0 20px 45px -10px rgba(255, 105, 180, 0.3), 0 8px 20px rgba(255, 143, 163, 0.2);
 }
 
 /* Custom romantic scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -145,11 +25,75 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #FFAAC9;
+  background: #FFB3C6;
   border-radius: 9999px;
   border: 2px solid #FFF0F5;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #FF758F;
+  background: #FB6F92;
+}
+
+/* Glassmorphism card styles */
+.glass-card {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 220, 230, 0.8);
+  box-shadow: 0 12px 35px -8px rgba(244, 114, 154, 0.15), 0 4px 15px rgba(255, 255, 255, 0.8) inset;
+}
+
+.glass-card-dark {
+  background: rgba(45, 20, 35, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 180, 200, 0.25);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.35);
+}
+
+.paper-card {
+  background: #FFFDF9;
+  background-image: 
+    radial-gradient(#F5E6D3 0.75px, transparent 0.75px),
+    radial-gradient(#F5E6D3 0.75px, #FFFDF9 0.75px);
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
+  box-shadow: 
+    0 1px 3px rgba(0,0,0,0.05),
+    0 10px 25px -5px rgba(180, 120, 140, 0.2),
+    0 0 0 1px rgba(220, 190, 190, 0.4);
+}
+
+/* Scrapbook pin shadow */
+.pin-shadow {
+  box-shadow: 0 15px 30px -5px rgba(120, 60, 80, 0.22), 0 5px 12px -2px rgba(0, 0, 0, 0.1);
+}
+
+/* Heart sparkle animation */
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0.3) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1.1) rotate(180deg); }
+}
+
+.animate-sparkle {
+  animation: sparkle 3s ease-in-out infinite;
+}
+
+/* Glow effects */
+.glow-rose {
+  box-shadow: 0 0 25px rgba(251, 111, 146, 0.65), 0 0 50px rgba(251, 111, 146, 0.25);
+}
+
+.glow-warm {
+  box-shadow: 0 0 30px rgba(244, 208, 111, 0.45);
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
